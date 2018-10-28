@@ -40,6 +40,21 @@ public class Checkpoint2 {
 				numeratorTwo = parseNumerator(fracTwo);
 				denominatorTwo = parseDenominator(fracTwo);
 				
+				//Checkpoint One Stuff
+				System.out.println("Fraction One is " + fracOne);
+				System.out.println("Numerator 1 is: " + numeratorOne);
+				System.out.println("Denominator 1 is: " + denominatorOne);
+				System.out.println();
+				System.out.println("Operator is: " + operator);
+				System.out.println();
+				System.out.println("Fraction Two is: " + fracTwo);
+				System.out.println("Numerator 2 is: " + numeratorTwo);
+				System.out.println("Denominator 2 is: " + denominatorTwo);
+				System.out.println();
+				System.out.println("Equation: " + numeratorOne + "/" + denominatorOne + " " + operator + " " + numeratorTwo + "/" + denominatorTwo);
+				System.out.println();
+				System.out.print("Answer: ");
+				
 				//Step 8: Check to see what operator was used and do math
 				if(operator.equals("+")) {
 					LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
@@ -58,7 +73,7 @@ public class Checkpoint2 {
 
 				//System.out.println(solution);
 				
-				//Step 9: Print next imput line for next input
+				//Step 9: Print next input line for next input
 				System.out.println();
 				System.out.println("Input:");
 			}
@@ -74,28 +89,41 @@ public class Checkpoint2 {
 		Scanner parseScanner = new Scanner(fraction).useDelimiter("/");
 		//Sets the whole numerator as a string (with mixed number if applicable)
 		String numeratorString = parseScanner.next();
-		int numerator;
-		int denominator = parseScanner.nextInt();
-		parseScanner.close();
-		
-		Scanner parseMixedNumberOne = new Scanner(numeratorString).useDelimiter("_");
-		//Set the first token to a cache variable
-		int mixedCache = parseMixedNumberOne.nextInt();
-		int wholeNumber = 0;
-		//Check to see if there is another token after the first
-		if(parseMixedNumberOne.hasNext()) {
-			//If there is set the whole number to the cache number
-			wholeNumber = mixedCache;
-			//And set the numerator as the next token
-			numerator = parseMixedNumberOne.nextInt();
-			numerator = (wholeNumber*denominator)+numerator;
+		if(parseScanner.hasNext()) {
+			int numerator;
+			int denominator = parseScanner.nextInt();
+			parseScanner.close();
+			
+			Scanner parseMixedNumberOne = new Scanner(numeratorString).useDelimiter("_");
+			//Set the first token to a cache variable
+			int mixedCache = parseMixedNumberOne.nextInt();
+			int wholeNumber = 0;
+			boolean isWholeNegative = false;
+			//Check to see if there is another token after the first
+			if(parseMixedNumberOne.hasNext()) {
+				//If there is set the whole number to the cache number
+				wholeNumber = mixedCache;
+				//And set the numerator as the next token
+				numerator = parseMixedNumberOne.nextInt();
+				if (wholeNumber < 0) {
+					numerator = ((wholeNumber*-1)*denominator)+numerator;
+					
+					return numerator*-1;
+				} else {
+					numerator = (wholeNumber*denominator)+numerator;
+					return numerator;
+				}
+			} else {
+				//If there is no next token set the numerator to the cache variable
+				numerator = mixedCache;
+				return numerator;
+			}
+			//Returns the numerator as a string
 		} else {
-			//If there is no next token set the numerator to the cache variable
-			numerator = mixedCache;
+			Scanner intConvert = new Scanner(numeratorString);
+			return intConvert.nextInt();
 		}
 		
-		//Returns the numerator as a string
-		return numerator;
 	}
 	
 	public static int parseDenominator(String fraction){
@@ -103,11 +131,21 @@ public class Checkpoint2 {
 		//Create scanner
 		Scanner parseScanner = new Scanner(fraction).useDelimiter("/");
 		//Sets the denominator as an int.
-		parseScanner.next();
-		int denominator = parseScanner.nextInt();
-		parseScanner.close();
+		String numeratorString = parseScanner.next();
+		if(parseScanner.hasNext()) {
+			int denominator = parseScanner.nextInt();
+			parseScanner.close();
+			return denominator;
+		} else {
+			Scanner intConvert = new Scanner(numeratorString);
+			int denom = intConvert.nextInt();
+			if(denom < 0) {
+				return denom*-1;
+			} else {
+				return denom;
+			}
+		}
 		//Returns the denominator as an int.
-		return denominator;
 	}
 	
 	public static void add(int numOne, int denomOne, int numTwo, int denomTwo) {
@@ -159,17 +197,6 @@ public class Checkpoint2 {
 		numOne = numOne*denomTwo;
 		numTwo = numTwo*denomOne;
 		return LCD + "!" + numOne + "!" + numTwo;
-	}
-	
-	public static void reduce(double numerator, double denominator) {
-		int GCF;
-		for(int i = 1000000000; i>=1; i--) {
-			if(numerator % i != 0) {
-				
-			} else {
-				GCF = i;
-			}
-		}
 	}
 }
 
