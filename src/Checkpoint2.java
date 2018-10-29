@@ -137,13 +137,7 @@ public class Checkpoint2 {
 			parseScanner.close();
 			return denominator;
 		} else {
-			Scanner intConvert = new Scanner(numeratorString);
-			int denom = intConvert.nextInt();
-			if(denom < 0) {
-				return denom*-1;
-			} else {
-				return denom;
-			}
+			return 1;
 		}
 		//Returns the denominator as an int.
 	}
