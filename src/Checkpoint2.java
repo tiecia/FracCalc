@@ -40,7 +40,7 @@ public class Checkpoint2 {
 				numeratorTwo = parseNumerator(fracTwo);
 				denominatorTwo = parseDenominator(fracTwo);
 				
-				//Checkpoint One Stuff
+				//Checkpoint Print Stuff
 				System.out.println("Fraction One is " + fracOne);
 				System.out.println("Numerator 1 is: " + numeratorOne);
 				System.out.println("Denominator 1 is: " + denominatorOne);
