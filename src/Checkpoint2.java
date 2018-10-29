@@ -55,7 +55,7 @@ public class Checkpoint2 {
 				System.out.println();
 				System.out.print("Answer: ");
 				
-				//Step 8: Check to see what operator was used and do math
+				//Step 6: Check to see what operator was used and do math
 				if(operator.equals("+")) {
 					LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 					add(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
@@ -73,7 +73,7 @@ public class Checkpoint2 {
 
 				//System.out.println(solution);
 				
-				//Step 9: Print next input line for next input
+				//Step 10: Print next input line for next input
 				System.out.println();
 				System.out.println("Input:");
 			}
@@ -93,7 +93,7 @@ public class Checkpoint2 {
 			int numerator;
 			int denominator = parseScanner.nextInt();
 			parseScanner.close();
-			
+
 			Scanner parseMixedNumberOne = new Scanner(numeratorString).useDelimiter("_");
 			//Set the first token to a cache variable
 			int mixedCache = parseMixedNumberOne.nextInt();
@@ -105,11 +105,15 @@ public class Checkpoint2 {
 				wholeNumber = mixedCache;
 				//And set the numerator as the next token
 				numerator = parseMixedNumberOne.nextInt();
+				
+				//Check to see if the whole number is negative.
 				if (wholeNumber < 0) {
+					//If it is make is mixed but first make the negative mixed positive.
 					numerator = ((wholeNumber*-1)*denominator)+numerator;
-					
+					//Return a negative version of the positive numerator.
 					return numerator*-1;
 				} else {
+					//If the number is positive make the fraction improper and return the numerator.
 					numerator = (wholeNumber*denominator)+numerator;
 					return numerator;
 				}
@@ -123,7 +127,6 @@ public class Checkpoint2 {
 			Scanner intConvert = new Scanner(numeratorString);
 			return intConvert.nextInt();
 		}
-		
 	}
 	
 	public static int parseDenominator(String fraction){
@@ -132,14 +135,16 @@ public class Checkpoint2 {
 		Scanner parseScanner = new Scanner(fraction).useDelimiter("/");
 		//Sets the denominator as an int.
 		String numeratorString = parseScanner.next();
+		//Check to see if the input was a whole number
 		if(parseScanner.hasNext()) {
+			//If it was a fraction set the denominator to the next token.
 			int denominator = parseScanner.nextInt();
 			parseScanner.close();
 			return denominator;
 		} else {
+			//If the input was a whole number set the denominator to one becaused there is not next token.
 			return 1;
 		}
-		//Returns the denominator as an int.
 	}
 	
 	public static void add(int numOne, int denomOne, int numTwo, int denomTwo) {
