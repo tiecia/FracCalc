@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Checkpoint2 {	
+public class Checkpoint3 {	
 	public static void main(String[] args) {
 		//Step 1: Declare all Variables
 		
