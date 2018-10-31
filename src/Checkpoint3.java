@@ -158,8 +158,11 @@ public class Checkpoint3 {
 		numOne = s.nextInt();
 		numTwo = s.nextInt();
 		//Does the math and prints the solution
-		System.out.println((numOne + numTwo) + "/" + LCD);
+		//System.out.println((numOne + numTwo) + "/" + LCD);
 		//return (numOne + numTwo) + "/" + LCD;
+		int numerator = numOne + numTwo;
+		int denominator = LCD;
+		simplify(numerator, denominator);
 	}
 	
 	public static void subtract(int numOne, int denomOne, int numTwo, int denomTwo) {
@@ -196,6 +199,23 @@ public class Checkpoint3 {
 		numOne = numOne*denomTwo;
 		numTwo = numTwo*denomOne;
 		return LCD + "!" + numOne + "!" + numTwo;
+	}
+	
+	public static void simplify(int num, int denom) {
+		int numerator = num;
+		int denominator = denom;
+		while (num != denom) {
+			if (num > denom) {
+				num = num - denom;
+			} else {
+				denom = denom - num;
+			}
+		}
+		int GCF = num;
+		System.out.println(GCF);
+		int simpleNum = num/GCF;
+		int simpleDenom = denom/GCF;
+		System.out.println(simpleNum + "/" + simpleDenom);
 	}
 }
 
