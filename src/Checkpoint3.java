@@ -55,22 +55,25 @@ public class Checkpoint3 {
 				System.out.println();
 				System.out.print("Answer: ");
 				
-				//Step 6: Check to see what operator was used and do math
-				if(operator.equals("+")) {
-					LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
-					add(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+				if(denominatorOne == 0 || denominatorTwo == 0) {
+					System.out.println("No Solution");
+				} else {
+					//Step 6: Check to see what operator was used and do math
+					if(operator.equals("+")) {
+						LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						add(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+					}
+					else if(operator.equals("-")) {
+						LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						subtract(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+					}
+					else if(operator.equals("*") || operator.equals("x")) {
+						multiply(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+					}
+					else if(operator.equals("/")) {
+						divide(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+					}
 				}
-				else if(operator.equals("-")) {
-					LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
-					subtract(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
-				}
-				else if(operator.equals("*") || operator.equals("x")) {
-					multiply(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
-				}
-				else if(operator.equals("/")) {
-					divide(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
-				}
-
 				//System.out.println(solution);
 				
 				//Step 10: Print next input line for next input
@@ -142,7 +145,7 @@ public class Checkpoint3 {
 			parseScanner.close();
 			return denominator;
 		} else {
-			//If the input was a whole number set the denominator to one becaused there is not next token.
+			//If the input was a whole number set the denominator to one because there is not next token.
 			return 1;
 		}
 	}
@@ -204,6 +207,11 @@ public class Checkpoint3 {
 	public static void simplify(int num, int denom) {
 		int numerator = num;
 		int denominator = denom;
+		int wholeNum = 0;
+		if(numerator > denominator) {
+			wholeNum = numerator/denominator;
+		}
+		
 		while (num != denom) {
 			if (num > denom) {
 				num = num - denom;
@@ -212,10 +220,27 @@ public class Checkpoint3 {
 			}
 		}
 		int GCF = num;
-		System.out.println(GCF);
-		int simpleNum = num/GCF;
-		int simpleDenom = denom/GCF;
-		System.out.println(simpleNum + "/" + simpleDenom);
+		int simpleNum;
+		int simpleDenom;
+
+		if(numerator == 0) {
+			simpleNum = 0;
+		} else {
+			simpleNum = numerator/GCF;
+		}
+		
+		
+		
+		simpleDenom = denominator/GCF;
+		
+		if(denominator == 1) {
+			System.out.println(simpleNum);
+		} 
+		if(wholeNum != 0){
+			System.out.println(wholeNum + "_" + simpleNum + "/" + simpleDenom);
+		} else {
+			System.out.println(simpleNum + "/" + simpleDenom);
+		}
 	}
 }
 
