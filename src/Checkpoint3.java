@@ -210,7 +210,7 @@ public class Checkpoint3 {
 		int wholeNum = 0;
 		if(numerator > denominator) {
 			wholeNum = numerator/denominator;
-			//numerator = wholeNum % numerator;
+			numerator = wholeNum % numerator;
 		}
 		while (num != denom) {
 			if (num > denom) {

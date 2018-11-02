@@ -14,6 +14,7 @@ public class Checkpoint2 {
 		int denominatorTwo;
 		
 		
+		
 		//inputs
 		String fracOne;
 		String operator;
