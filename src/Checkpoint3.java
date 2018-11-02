@@ -20,6 +20,8 @@ public class Checkpoint3 {
 		String fracTwo;
 		boolean calcOn = true;
 		
+		String solution = null;
+		
 		//Step 2: Create input Scanner (Scans the console for input)
 		Scanner inputScanner = new Scanner(System.in);
 		System.out.println("Input: ");
@@ -60,19 +62,21 @@ public class Checkpoint3 {
 				} else {
 					//Step 6: Check to see what operator was used and do math
 					if(operator.equals("+")) {
-						LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
-						add(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						//LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						solution = add(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						simplify(solution);
 					}
 					else if(operator.equals("-")) {
-						LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
-						subtract(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						//LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						solution = subtract(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 					}
 					else if(operator.equals("*") || operator.equals("x")) {
-						multiply(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						solution = multiply(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 					}
 					else if(operator.equals("/")) {
-						divide(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						solution = divide(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 					}
+					//simplify(solution);
 				}
 				//System.out.println(solution);
 				
@@ -150,7 +154,7 @@ public class Checkpoint3 {
 		}
 	}
 	
-	public static void add(int numOne, int denomOne, int numTwo, int denomTwo) {
+	public static String add(int numOne, int denomOne, int numTwo, int denomTwo) {
 		String LCDString;
 		//Finds a common denominator
 		LCDString = LCD(numOne, denomOne, numTwo, denomTwo);
@@ -162,13 +166,12 @@ public class Checkpoint3 {
 		numTwo = s.nextInt();
 		//Does the math and prints the solution
 		//System.out.println((numOne + numTwo) + "/" + LCD);
-		//return (numOne + numTwo) + "/" + LCD;
-		int numerator = numOne + numTwo;
-		int denominator = LCD;
-		simplify(numerator, denominator);
+		return (numOne + numTwo) + "/" + LCD;
+		//int numerator = numOne + numTwo;
+		//int denominator = LCD;
 	}
 	
-	public static void subtract(int numOne, int denomOne, int numTwo, int denomTwo) {
+	public static String subtract(int numOne, int denomOne, int numTwo, int denomTwo) {
 		String LCDString;
 		//Finds a common denominator
 		LCDString = LCD(numOne, denomOne, numTwo, denomTwo);
@@ -179,20 +182,20 @@ public class Checkpoint3 {
 		numOne = s.nextInt();
 		numTwo = s.nextInt();
 		//Does the math and prints the solution
-		System.out.println((numOne - numTwo) + "/" + LCD);
-		//return (numOne - numTwo) + "/" + LCD;
+		//System.out.println((numOne - numTwo) + "/" + LCD);
+		return (numOne - numTwo) + "/" + LCD;
 	}
 	
-	public static void multiply(int numOne, int denomOne, int numTwo, int denomTwo) {
-		//return (numOne*numTwo) + "/" + (denomOne*denomTwo);
+	public static String multiply(int numOne, int denomOne, int numTwo, int denomTwo) {
+		return (numOne*numTwo) + "/" + (denomOne*denomTwo);
 		//Does the math and prints it
-		System.out.println((numOne*numTwo) + "/" + (denomOne*denomTwo));
+		//System.out.println((numOne*numTwo) + "/" + (denomOne*denomTwo));
 	}
 	
-	public static void divide(int numOne, int denomOne, int numTwo, int denomTwo) {
-		//return (numOne * denomTwo) + "/" + (numTwo * denomOne);
+	public static String divide(int numOne, int denomOne, int numTwo, int denomTwo) {
+		return (numOne * denomTwo) + "/" + (numTwo * denomOne);
 		//Does the math and prints it
-		System.out.println((numOne * denomTwo) + "/" + (numTwo * denomOne));
+		//System.out.println((numOne * denomTwo) + "/" + (numTwo * denomOne));
 	}
 	
 	public static String LCD(int numOne, int denomOne, int numTwo, int denomTwo) {
@@ -204,14 +207,21 @@ public class Checkpoint3 {
 		return LCD + "!" + numOne + "!" + numTwo;
 	}
 	
-	public static void simplify(int num, int denom) {
-		int numerator = num;
-		int denominator = denom;
+	public static void simplify(String fraction) {
+		Scanner parseFrac = new Scanner(fraction).useDelimiter("/");
+		int numerator = parseFrac.nextInt();
+		int denominator = parseFrac.nextInt();
+		parseFrac.close();
 		int wholeNum = 0;
 		if(numerator > denominator) {
 			wholeNum = numerator/denominator;
-			numerator = wholeNum % numerator;
+			String subtract = subtract(wholeNum, 1, numerator, denominator);
+			Scanner parseSub = new Scanner(subtract).useDelimiter("/");
+			numerator = parseSub.nextInt();
+			parseSub.close();
 		}
+		int num = numerator;
+		int denom = denominator;
 		while (num != denom) {
 			if (num > denom) {
 				num = num - denom;
@@ -220,6 +230,7 @@ public class Checkpoint3 {
 			}
 		}
 		int GCF = num;
+		System.out.println(GCF);
 		int simpleNum;
 		int simpleDenom;
 
@@ -237,7 +248,11 @@ public class Checkpoint3 {
 			System.out.println(simpleNum);
 		} 
 		if(wholeNum != 0){
-			System.out.println(wholeNum + "_" + simpleNum + "/" + simpleDenom);
+			if(numerator == 0) {
+				System.out.println(wholeNum);
+			} else {
+				System.out.println(wholeNum + "_" + simpleNum + "/" + simpleDenom);
+			}
 		} else {
 			System.out.println(simpleNum + "/" + simpleDenom);
 		}
