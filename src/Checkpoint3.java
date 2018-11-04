@@ -172,6 +172,7 @@ public class Checkpoint3 {
 	}
 	
 	public static String subtract(int numOne, int denomOne, int numTwo, int denomTwo) {
+		
 		String LCDString;
 		//Finds a common denominator
 		LCDString = LCD(numOne, denomOne, numTwo, denomTwo);
@@ -216,10 +217,14 @@ public class Checkpoint3 {
 		if(numerator > denominator) {
 			wholeNum = numerator/denominator;
 			String subtract = subtract(wholeNum, 1, numerator, denominator);
+			
 			Scanner parseSub = new Scanner(subtract).useDelimiter("/");
+			
 			numerator = parseSub.nextInt();
-			parseSub.close();
+			System.out.println(numerator);
+			//parseSub.close();
 		}
+		
 		int num = numerator;
 		int denom = denominator;
 		while (num != denom) {
@@ -230,7 +235,7 @@ public class Checkpoint3 {
 			}
 		}
 		int GCF = num;
-		System.out.println(GCF);
+		//System.out.println(GCF);
 		int simpleNum;
 		int simpleDenom;
 
