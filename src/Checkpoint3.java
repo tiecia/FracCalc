@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+@SuppressWarnings("resource")
 public class Checkpoint3 {	
 	public static void main(String[] args) {
 		//Step 1: Declare all Variables
@@ -43,18 +44,18 @@ public class Checkpoint3 {
 				denominatorTwo = parseDenominator(fracTwo);
 				
 				//Checkpoint Print Stuff
-				System.out.println("Fraction One is " + fracOne);
-				System.out.println("Numerator 1 is: " + numeratorOne);
-				System.out.println("Denominator 1 is: " + denominatorOne);
-				System.out.println();
-				System.out.println("Operator is: " + operator);
-				System.out.println();
-				System.out.println("Fraction Two is: " + fracTwo);
-				System.out.println("Numerator 2 is: " + numeratorTwo);
-				System.out.println("Denominator 2 is: " + denominatorTwo);
-				System.out.println();
-				System.out.println("Equation: " + numeratorOne + "/" + denominatorOne + " " + operator + " " + numeratorTwo + "/" + denominatorTwo);
-				System.out.println();
+//				System.out.println("Fraction One is " + fracOne);
+//				System.out.println("Numerator 1 is: " + numeratorOne);
+//				System.out.println("Denominator 1 is: " + denominatorOne);
+//				System.out.println();
+//				System.out.println("Operator is: " + operator);
+//				System.out.println();
+//				System.out.println("Fraction Two is: " + fracTwo);
+//				System.out.println("Numerator 2 is: " + numeratorTwo);
+//				System.out.println("Denominator 2 is: " + denominatorTwo);
+//				System.out.println();
+//				System.out.println("Equation: " + numeratorOne + "/" + denominatorOne + " " + operator + " " + numeratorTwo + "/" + denominatorTwo);
+//				System.out.println();
 				System.out.print("Answer: ");
 				
 				if(denominatorOne == 0 || denominatorTwo == 0) {
@@ -64,17 +65,22 @@ public class Checkpoint3 {
 					if(operator.equals("+")) {
 						//LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 						solution = add(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						//System.out.println(solution);
 						simplify(solution);
 					}
 					else if(operator.equals("-")) {
 						//LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 						solution = subtract(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+					//	System.out.print(solution);
+						simplify(solution);
 					}
 					else if(operator.equals("*") || operator.equals("x")) {
 						solution = multiply(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						simplify(solution);
 					}
 					else if(operator.equals("/")) {
 						solution = divide(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						simplify(solution);
 					}
 					//simplify(solution);
 				}
@@ -90,8 +96,8 @@ public class Checkpoint3 {
 		System.out.println("Goodbye");
 	}
 	
+	
 	public static int parseNumerator(String fraction){
-		@SuppressWarnings("resource")
 		//Create scanner
 		Scanner parseScanner = new Scanner(fraction).useDelimiter("/");
 		//Sets the whole numerator as a string (with mixed number if applicable)
@@ -100,12 +106,11 @@ public class Checkpoint3 {
 			int numerator;
 			int denominator = parseScanner.nextInt();
 			parseScanner.close();
-
+			
 			Scanner parseMixedNumberOne = new Scanner(numeratorString).useDelimiter("_");
 			//Set the first token to a cache variable
 			int mixedCache = parseMixedNumberOne.nextInt();
 			int wholeNumber = 0;
-			boolean isWholeNegative = false;
 			//Check to see if there is another token after the first
 			if(parseMixedNumberOne.hasNext()) {
 				//If there is set the whole number to the cache number
@@ -158,7 +163,6 @@ public class Checkpoint3 {
 		String LCDString;
 		//Finds a common denominator
 		LCDString = LCD(numOne, denomOne, numTwo, denomTwo);
-		@SuppressWarnings("resource")
 		//Returns common denominator and new numerators and string to be parsed again
 		Scanner s = new Scanner(LCDString).useDelimiter("!");
 		int LCD = s.nextInt();
@@ -176,7 +180,6 @@ public class Checkpoint3 {
 		String LCDString;
 		//Finds a common denominator
 		LCDString = LCD(numOne, denomOne, numTwo, denomTwo);
-		@SuppressWarnings("resource")
 		//Returns common denominator and new numerators and string to be parsed again
 		Scanner s = new Scanner(LCDString).useDelimiter("!");
 		int LCD = s.nextInt();
@@ -209,57 +212,67 @@ public class Checkpoint3 {
 	}
 	
 	public static void simplify(String fraction) {
+		//Create Scanner to parse input string
 		Scanner parseFrac = new Scanner(fraction).useDelimiter("/");
 		int numerator = parseFrac.nextInt();
 		int denominator = parseFrac.nextInt();
 		parseFrac.close();
 		int wholeNum = 0;
-		if(numerator > denominator) {
+		//Check to see if input is an improper fraction and make it a mixed number;
+		if(numerator > denominator || numerator*-1 > denominator && denominator != 1) {
 			wholeNum = numerator/denominator;
-			String subtract = subtract(wholeNum, 1, numerator, denominator);
-			
-			Scanner parseSub = new Scanner(subtract).useDelimiter("/");
-			
-			numerator = parseSub.nextInt();
-			System.out.println(numerator);
-			//parseSub.close();
+			numerator = numerator%denominator;
 		}
 		
+		//Find the GCF of the numerator and denominator
 		int num = numerator;
 		int denom = denominator;
-		while (num != denom) {
-			if (num > denom) {
-				num = num - denom;
-			} else {
-				denom = denom - num;
-			}
+		int t;
+		while(denom != 0) {
+			t = denom;
+			denom = num % denom;
+			num = t;
 		}
 		int GCF = num;
-		//System.out.println(GCF);
-		int simpleNum;
-		int simpleDenom;
-
+		
+		int simpleNum;  //Not necessary will take out later
+		int simpleDenom;   //Not necessary will take out later
+		
+		//Check to see if the fraction is 0
 		if(numerator == 0) {
 			simpleNum = 0;
 		} else {
 			simpleNum = numerator/GCF;
 		}
 		
-		
-		
+		//simplify the denominator;
 		simpleDenom = denominator/GCF;
 		
-		if(denominator == 1) {
+		//Makes sure the negative sign is in front of the numerator and not the denominator
+		if(simpleDenom < 0) {
+			simpleNum = simpleNum*-1;
+			simpleDenom = simpleDenom*-1;
+		}
+		
+		//If the fraction is over 1 just print the denominator
+		if(simpleDenom == 1) {
 			System.out.println(simpleNum);
-		} 
-		if(wholeNum != 0){
-			if(numerator == 0) {
-				System.out.println(wholeNum);
-			} else {
-				System.out.println(wholeNum + "_" + simpleNum + "/" + simpleDenom);
-			}
 		} else {
-			System.out.println(simpleNum + "/" + simpleDenom);
+			//formats the output properly for positive and negative mixed numbers
+			if(wholeNum != 0){
+				if(numerator == 0) {
+					System.out.println(wholeNum);
+				} else {
+					if(simpleNum < 0) {
+						System.out.println(wholeNum + "_" + simpleNum*-1 + "/" + simpleDenom);
+					} else {
+						System.out.println(wholeNum + "_" + simpleNum + "/" + simpleDenom);
+					}
+				}
+			} else {
+				//If not a mixed print fraction normally
+				System.out.println(simpleNum + "/" + simpleDenom);
+			}
 		}
 	}
 }
