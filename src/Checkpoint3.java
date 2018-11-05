@@ -218,11 +218,14 @@ public class Checkpoint3 {
 		int denominator = parseFrac.nextInt();
 		parseFrac.close();
 		int wholeNum = 0;
+		
+	
 		//Check to see if input is an improper fraction and make it a mixed number;
-		if(numerator > denominator || numerator*-1 > denominator && denominator != 1) {
+		if((numerator > denominator || numerator*-1 > denominator) && denominator != 1) {
 			wholeNum = numerator/denominator;
 			numerator = numerator%denominator;
 		}
+		
 		
 		//Find the GCF of the numerator and denominator
 		int num = numerator;
