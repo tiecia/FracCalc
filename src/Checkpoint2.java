@@ -41,18 +41,18 @@ public class Checkpoint2 {
 				denominatorTwo = parseDenominator(fracTwo);
 				
 				//Checkpoint Print Stuff
-				System.out.println("Fraction One is " + fracOne);
-				System.out.println("Numerator 1 is: " + numeratorOne);
-				System.out.println("Denominator 1 is: " + denominatorOne);
-				System.out.println();
-				System.out.println("Operator is: " + operator);
-				System.out.println();
-				System.out.println("Fraction Two is: " + fracTwo);
-				System.out.println("Numerator 2 is: " + numeratorTwo);
-				System.out.println("Denominator 2 is: " + denominatorTwo);
-				System.out.println();
-				System.out.println("Equation: " + numeratorOne + "/" + denominatorOne + " " + operator + " " + numeratorTwo + "/" + denominatorTwo);
-				System.out.println();
+//				System.out.println("Fraction One is " + fracOne);
+//				System.out.println("Numerator 1 is: " + numeratorOne);
+//				System.out.println("Denominator 1 is: " + denominatorOne);
+//				System.out.println();
+//				System.out.println("Operator is: " + operator);
+//				System.out.println();
+//				System.out.println("Fraction Two is: " + fracTwo);
+//				System.out.println("Numerator 2 is: " + numeratorTwo);
+//				System.out.println("Denominator 2 is: " + denominatorTwo);
+//				System.out.println();
+//				System.out.println("Equation: " + numeratorOne + "/" + denominatorOne + " " + operator + " " + numeratorTwo + "/" + denominatorTwo);
+//				System.out.println();
 				System.out.print("Answer: ");
 				
 				//Step 6: Check to see what operator was used and do math
