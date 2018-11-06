@@ -80,6 +80,7 @@ public class Checkpoint3 {
 					}
 					else if(operator.equals("/")) {
 						solution = divide(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
+						//System.out.println(solution);
 						simplify(solution);
 					}
 					//simplify(solution);
@@ -219,14 +220,15 @@ public class Checkpoint3 {
 		parseFrac.close();
 		int wholeNum = 0;
 		
-	
+		
 		//Check to see if input is an improper fraction and make it a mixed number;
-		if((numerator > denominator || numerator*-1 > denominator) && denominator != 1) {
+		if((numerator > denominator || numerator*-1 > denominator) && (denominator != 1 && denominator != -1)) {
 			wholeNum = numerator/denominator;
 			numerator = numerator%denominator;
+			//System.out.println(78);
 		}
 		
-		
+	
 		//Find the GCF of the numerator and denominator
 		int num = numerator;
 		int denom = denominator;
@@ -238,8 +240,8 @@ public class Checkpoint3 {
 		}
 		int GCF = num;
 		
-		int simpleNum;  //Not necessary will take out later
-		int simpleDenom;   //Not necessary will take out later
+		int simpleNum;  
+		int simpleDenom;   
 		
 		//Check to see if the fraction is 0
 		if(numerator == 0) {
