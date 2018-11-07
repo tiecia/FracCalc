@@ -51,7 +51,7 @@ public class GUICalc extends GUI {
 					if(operator.equals("+")) {
 						//LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 						solution = add(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
-						//System.out.println(solution);
+						System.out.println(solution);
 						solution = simplify(solution);
 					}
 					else if(operator.equals("-")) {
@@ -205,7 +205,9 @@ public class GUICalc extends GUI {
 		//Check to see if input is an improper fraction and make it a mixed number;
 		if((numerator > denominator || numerator*-1 > denominator) && (denominator != 1 && denominator != -1)) {
 			wholeNum = numerator/denominator;
-			numerator = numerator%denominator;
+			if(numerator%denominator != 0) {
+				numerator = numerator%denominator;
+			}
 		}
 		
 	

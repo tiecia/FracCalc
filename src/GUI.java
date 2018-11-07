@@ -21,6 +21,8 @@ import java.awt.Color;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GUI {
 
@@ -71,13 +73,13 @@ private JTextField textField;
 		        }
 		    }
 		} catch (UnsupportedLookAndFeelException e) {
-		    // handle exception
+		    
 		} catch (ClassNotFoundException e) {
-		    // handle exception
+		    
 		} catch (InstantiationException e) {
-		    // handle exception
+
 		} catch (IllegalAccessException e) {
-		    // handle exception
+
 		}
 		
 		frame.setBounds(100, 100, 442, 467);
@@ -95,6 +97,16 @@ private JTextField textField;
 		panel.setLayout(null);
 		
 		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+		         if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					String output;
+					output = GUICalc.fracCalc(textField.getText());
+					textField.setText(output);
+		          }
+			}
+		});
 		textField.setBounds(0, 0, 334, 31);
 		panel.add(textField);
 		textField.setColumns(10);
@@ -283,6 +295,7 @@ private JTextField textField;
 		panel_5.add(Enter);
 		
 		JLabel lblNoteYouMust = new JLabel("Note: You MUST use the fraction bar button as the fraction bar. (Not the \"/\" button)");
+		lblNoteYouMust.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNoteYouMust.setForeground(Color.BLACK);
 		lblNoteYouMust.setBounds(10, 372, 406, 22);
 		frame.getContentPane().add(lblNoteYouMust);
