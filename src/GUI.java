@@ -1,19 +1,20 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridBagLayout;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
-import java.awt.Component;
-import javax.swing.Box;
-import java.awt.FlowLayout;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
+
+
+
 import javax.swing.JButton;
-import javax.swing.JSeparator;
+
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -21,16 +22,24 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-public class GUI extends GUICalc {
+public class GUI {
 
-	private JFrame frame;
-	private JTextField textField;
+private JTextField textField;
 
 	/**
 	 * Launch the application.
 	 */
+	
+	public static JFrame frame = new JFrame();
+	public static JPanel panel_2 = new JPanel();
+	public static JPanel panel_1 = new JPanel();
+	public static JPanel panel_3 = new JPanel();
+	public static JPanel panel = new JPanel();
+	public static JPanel panel_5 = new JPanel();
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@SuppressWarnings("static-access")
 			public void run() {
 				try {
 					GUI window = new GUI();
@@ -53,8 +62,24 @@ public class GUI extends GUICalc {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(216, 191, 216));
+		
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (UnsupportedLookAndFeelException e) {
+		    // handle exception
+		} catch (ClassNotFoundException e) {
+		    // handle exception
+		} catch (InstantiationException e) {
+		    // handle exception
+		} catch (IllegalAccessException e) {
+		    // handle exception
+		}
+		
 		frame.setBounds(100, 100, 442, 467);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -64,7 +89,7 @@ public class GUI extends GUICalc {
 		frame.getContentPane().add(TopMargin);
 		TopMargin.setLayout(null);
 		
-		JPanel panel = new JPanel();
+
 		panel.setBounds(0, 64, 406, 32);
 		TopMargin.add(panel);
 		panel.setLayout(null);
@@ -88,12 +113,14 @@ public class GUI extends GUICalc {
 		TopMargin.add(lblFractionCalculator);
 		lblFractionCalculator.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		
-		JPanel panel_1 = new JPanel();
+
 		panel_1.setBounds(10, 119, 215, 248);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
+
 		
-		JPanel panel_2 = new JPanel();
+		
+		
 		panel_2.setBounds(0, 0, 215, 200);
 		panel_1.add(panel_2);
 		panel_2.setLayout(new GridLayout(0, 3, 5, 5));
@@ -194,7 +221,7 @@ public class GUI extends GUICalc {
 		});
 		panel_2.add(button_1);
 		
-		JPanel panel_3 = new JPanel();
+		
 		panel_3.setBounds(0, 206, 215, 38);
 		panel_1.add(panel_3);
 		panel_3.setLayout(new GridLayout(0, 1, 0, 0));
@@ -207,7 +234,7 @@ public class GUI extends GUICalc {
 		});
 		panel_3.add(btnFractionBar);
 		
-		JPanel panel_5 = new JPanel();
+
 		panel_5.setBounds(233, 118, 183, 249);
 		frame.getContentPane().add(panel_5);
 		panel_5.setLayout(new GridLayout(0, 1, 0, 10));
@@ -248,7 +275,7 @@ public class GUI extends GUICalc {
 		Enter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String output;
-				output = fracCalc(textField.getText());
+				output = GUICalc.fracCalc(textField.getText());
 				textField.setText(output);
 				
 			}
@@ -266,22 +293,12 @@ public class GUI extends GUICalc {
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 		
-		JMenu mnColor = new JMenu("Color");
+		JMenuItem mnColor = new JMenuItem("Change Color");
+		mnColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ColorSliders.colorChange();
+			}
+		});
 		mnFile.add(mnColor);
-		
-		JMenuItem mnRed = new JMenuItem("Red");
-		mnColor.add(mnRed);
-		
-		JMenuItem mntmGreen = new JMenuItem("Green");
-		mnColor.add(mntmGreen);
-		
-		JMenuItem mntmBlue = new JMenuItem("Blue");
-		mnColor.add(mntmBlue);
-		
-		JMenuItem mntmLightBlue = new JMenuItem("Light Blue");
-		mnColor.add(mntmLightBlue);
-		
-		JMenuItem mntmHelp = new JMenuItem("Help");
-		mnFile.add(mntmHelp);
 	}
 }

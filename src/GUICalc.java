@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 @SuppressWarnings("resource")
-public class GUICalc {
+public class GUICalc extends GUI {
 	public static String fracCalc(String input) {
 		//Step 1: Declare all Variables
 		
