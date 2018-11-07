@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 @SuppressWarnings("resource")
-public class Checkpoint3 {	
-	public static void main(String[] args) {
+public class GUICalc extends GUI {
+	public static String fracCalc(String input) {
 		//Step 1: Declare all Variables
 		
 		
@@ -24,8 +24,8 @@ public class Checkpoint3 {
 		String solution = null;
 		
 		//Step 2: Create input Scanner (Scans the console for input)
-		Scanner inputScanner = new Scanner(System.in);
-		System.out.println("Input: ");
+		Scanner inputScanner = new Scanner(input);
+		//System.out.println("Input: ");
 		//Step 3: Calculator ON while loop
 		while(inputScanner.hasNext() && calcOn == true) {
 			if(inputScanner.hasNext("quit")) {
@@ -42,59 +42,41 @@ public class Checkpoint3 {
 				denominatorOne = parseDenominator(fracOne);
 				numeratorTwo = parseNumerator(fracTwo);
 				denominatorTwo = parseDenominator(fracTwo);
-				
-				//Checkpoint Print Stuff
-//				System.out.println("Fraction One is " + fracOne);
-//				System.out.println("Numerator 1 is: " + numeratorOne);
-//				System.out.println("Denominator 1 is: " + denominatorOne);
-//				System.out.println();
-//				System.out.println("Operator is: " + operator);
-//				System.out.println();
-//				System.out.println("Fraction Two is: " + fracTwo);
-//				System.out.println("Numerator 2 is: " + numeratorTwo);
-//				System.out.println("Denominator 2 is: " + denominatorTwo);
-//				System.out.println();
-//				System.out.println("Equation: " + numeratorOne + "/" + denominatorOne + " " + operator + " " + numeratorTwo + "/" + denominatorTwo);
-//				System.out.println();
-				System.out.print("Answer: ");
+
 				
 				if(denominatorOne == 0 || denominatorTwo == 0) {
-					System.out.println("No Solution");
+					return "No Solution";
 				} else {
 					//Step 6: Check to see what operator was used and do math
 					if(operator.equals("+")) {
 						//LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 						solution = add(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 						//System.out.println(solution);
-						simplify(solution);
+						solution = simplify(solution);
 					}
 					else if(operator.equals("-")) {
 						//LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 						solution = subtract(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 					//	System.out.print(solution);
-						simplify(solution);
+						solution = simplify(solution);
 					}
 					else if(operator.equals("*") || operator.equals("x")) {
 						solution = multiply(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
-						simplify(solution);
+						solution = simplify(solution);
 					}
 					else if(operator.equals("/")) {
 						solution = divide(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 						//System.out.println(solution);
-						simplify(solution);
+						solution = simplify(solution);
 					}
-					//simplify(solution);
 				}
-				//System.out.println(solution);
-				
-				//Step 10: Print next input line for next input
-				System.out.println();
-				System.out.println("Input:");
+				return solution;
 			}
 		}
 		//If quit phrase was used close the scanner and say goodbye
 		inputScanner.close();
 		System.out.println("Goodbye");
+		return "";
 	}
 	
 	
@@ -143,11 +125,10 @@ public class Checkpoint3 {
 	}
 	
 	public static int parseDenominator(String fraction){
-		@SuppressWarnings("resource")
 		//Create scanner
 		Scanner parseScanner = new Scanner(fraction).useDelimiter("/");
 		//Sets the denominator as an int.
-		String numeratorString = parseScanner.next();
+		parseScanner.next();
 		//Check to see if the input was a whole number
 		if(parseScanner.hasNext()) {
 			//If it was a fraction set the denominator to the next token.
@@ -212,7 +193,7 @@ public class Checkpoint3 {
 		return LCD + "!" + numOne + "!" + numTwo;
 	}
 	
-	public static void simplify(String fraction) {
+	public static String simplify(String fraction) {
 		//Create Scanner to parse input string
 		Scanner parseFrac = new Scanner(fraction).useDelimiter("/");
 		int numerator = parseFrac.nextInt();
@@ -225,7 +206,6 @@ public class Checkpoint3 {
 		if((numerator > denominator || numerator*-1 > denominator) && (denominator != 1 && denominator != -1)) {
 			wholeNum = numerator/denominator;
 			numerator = numerator%denominator;
-			//System.out.println(78);
 		}
 		
 	
@@ -261,22 +241,22 @@ public class Checkpoint3 {
 		
 		//If the fraction is over 1 just print the denominator
 		if(simpleDenom == 1) {
-			System.out.println(simpleNum);
+			return simpleNum + "";
 		} else {
 			//formats the output properly for positive and negative mixed numbers
 			if(wholeNum != 0){
 				if(numerator == 0) {
-					System.out.println(wholeNum);
+					return wholeNum + "";
 				} else {
 					if(simpleNum < 0) {
-						System.out.println(wholeNum + "_" + simpleNum*-1 + "/" + simpleDenom);
+						return wholeNum + "_" + simpleNum*-1 + "/" + simpleDenom;
 					} else {
-						System.out.println(wholeNum + "_" + simpleNum + "/" + simpleDenom);
+						return wholeNum + "_" + simpleNum + "/" + simpleDenom;
 					}
 				}
 			} else {
 				//If not a mixed print fraction normally
-				System.out.println(simpleNum + "/" + simpleDenom);
+				return simpleNum + "/" + simpleDenom;
 			}
 		}
 	}
