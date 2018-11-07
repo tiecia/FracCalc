@@ -23,6 +23,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 
 public class GUI {
 
@@ -308,6 +309,7 @@ private JTextField textField;
 		menuBar.add(mnFile);
 		
 		JMenuItem mnColor = new JMenuItem("Change Color");
+		mnColor.setIcon(new ImageIcon(GUI.class.getResource("/com/sun/javafx/scene/control/skin/caspian/dialog-information.png")));
 		mnColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ColorSliders.colorChange();
