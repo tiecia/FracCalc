@@ -16,6 +16,10 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class GUI extends GUICalc {
 
@@ -50,7 +54,8 @@ public class GUI extends GUICalc {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 442, 417);
+		frame.getContentPane().setBackground(new Color(216, 191, 216));
+		frame.setBounds(100, 100, 442, 467);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -249,5 +254,34 @@ public class GUI extends GUICalc {
 			}
 		});
 		panel_5.add(Enter);
+		
+		JLabel lblNoteYouMust = new JLabel("Note: You MUST use the fraction bar button as the fraction bar. (Not the \"/\" button)");
+		lblNoteYouMust.setForeground(Color.BLACK);
+		lblNoteYouMust.setBounds(10, 372, 406, 22);
+		frame.getContentPane().add(lblNoteYouMust);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenu mnColor = new JMenu("Color");
+		mnFile.add(mnColor);
+		
+		JMenuItem mnRed = new JMenuItem("Red");
+		mnColor.add(mnRed);
+		
+		JMenuItem mntmGreen = new JMenuItem("Green");
+		mnColor.add(mntmGreen);
+		
+		JMenuItem mntmBlue = new JMenuItem("Blue");
+		mnColor.add(mntmBlue);
+		
+		JMenuItem mntmLightBlue = new JMenuItem("Light Blue");
+		mnColor.add(mntmLightBlue);
+		
+		JMenuItem mntmHelp = new JMenuItem("Help");
+		mnFile.add(mntmHelp);
 	}
 }
