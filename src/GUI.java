@@ -87,6 +87,7 @@ private JTextField textField;
 		frame.getContentPane().setLayout(null);
 		
 		JPanel TopMargin = new JPanel();
+		TopMargin.setBackground(new Color(240, 240, 240)); //214, 217, 223
 		TopMargin.setBounds(10, 11, 406, 96);
 		frame.getContentPane().add(TopMargin);
 		TopMargin.setLayout(null);
@@ -121,9 +122,9 @@ private JTextField textField;
 		panel.add(btnClear);
 		
 		JLabel lblFractionCalculator = new JLabel("Fraction Calculator");
-		lblFractionCalculator.setBounds(42, 0, 316, 46);
+		lblFractionCalculator.setBounds(6, 0, 400, 46);
 		TopMargin.add(lblFractionCalculator);
-		lblFractionCalculator.setFont(new Font("Tahoma", Font.PLAIN, 38));
+		lblFractionCalculator.setFont(new Font("Consolas", Font.PLAIN, 38));
 		
 
 		panel_1.setBounds(10, 119, 215, 248);
