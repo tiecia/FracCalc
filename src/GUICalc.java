@@ -51,7 +51,7 @@ public class GUICalc extends GUI {
 					if(operator.equals("+")) {
 						//LCD(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
 						solution = add(numeratorOne, denominatorOne, numeratorTwo, denominatorTwo);
-						System.out.println(solution);
+						//System.out.println(solution);
 						solution = simplify(solution);
 					}
 					else if(operator.equals("-")) {

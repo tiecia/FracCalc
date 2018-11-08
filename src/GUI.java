@@ -103,6 +103,7 @@ private JTextField textField;
 		panel.setLayout(null);
 		
 		textField = new JTextField();
+		textField.setFont(new Font("Digital-7", Font.PLAIN, 20));
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -129,7 +130,7 @@ private JTextField textField;
 		JLabel lblFractionCalculator = new JLabel("Fraction Calculator");
 		lblFractionCalculator.setBounds(6, 0, 400, 46);
 		TopMargin.add(lblFractionCalculator);
-		lblFractionCalculator.setFont(new Font("Consolas", Font.PLAIN, 38));
+		lblFractionCalculator.setFont(new Font("Digital-7", Font.PLAIN, 47));
 		
 
 		panel_1.setBounds(10, 119, 215, 248);
@@ -294,8 +295,7 @@ private JTextField textField;
 			public void actionPerformed(ActionEvent e) {
 				String output;
 				output = GUICalc.fracCalc(textField.getText());
-				textField.setText(output);
-				
+				textField.setText(output);		
 			}
 		});
 		panel_5.add(Enter);
