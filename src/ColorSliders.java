@@ -11,9 +11,9 @@ import java.awt.Color;
 public class ColorSliders extends GUI {
 	public static JFrame frame2 = new JFrame();
 	
-	private static int red = 240;
-	private static int green = 240;
-	private static int blue = 240;
+	private static int red = 214;
+	private static int green = 227;   //214, 227, 223
+	private static int blue = 223;
 	public static String color = null;
 	
 	/**
@@ -38,12 +38,12 @@ public class ColorSliders extends GUI {
 		
 		JSlider redSlider = new JSlider();
 		redSlider.setMaximum(255);
-		redSlider.setValue(240);
+		redSlider.setValue(214);
 		redSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				red = redSlider.getValue();
 				colorPanel.setBackground(new Color(red, green, blue));
-				frame.getContentPane().setBackground(new Color(red, green, blue));
+				frmFractionCalculator.getContentPane().setBackground(new Color(red, green, blue));
 				panel_1.setBackground(new Color(red, green, blue));
 				panel_2.setBackground(new Color(red, green, blue));
 				panel_3.setBackground(new Color(red, green, blue));
@@ -56,12 +56,12 @@ public class ColorSliders extends GUI {
 		
 		JSlider greenSlider = new JSlider();
 		greenSlider.setMaximum(255);
-		greenSlider.setValue(240);
+		greenSlider.setValue(227);
 		greenSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				green = greenSlider.getValue();
 				colorPanel.setBackground(new Color(red, green, blue));
-				frame.getContentPane().setBackground(new Color(red, green, blue));
+				frmFractionCalculator.getContentPane().setBackground(new Color(red, green, blue));
 				panel_1.setBackground(new Color(red, green, blue));
 				panel_2.setBackground(new Color(red, green, blue));
 				panel_3.setBackground(new Color(red, green, blue));
@@ -74,12 +74,12 @@ public class ColorSliders extends GUI {
 		
 		JSlider blueSlider = new JSlider();
 		blueSlider.setMaximum(255);
-		blueSlider.setValue(240);
+		blueSlider.setValue(223);
 		blueSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				blue = blueSlider.getValue();
 				colorPanel.setBackground(new Color(red, green, blue));
-				frame.getContentPane().setBackground(new Color(red, green, blue));
+				frmFractionCalculator.getContentPane().setBackground(new Color(red, green, blue));
 				panel_1.setBackground(new Color(red, green, blue));
 				panel_2.setBackground(new Color(red, green, blue));
 				panel_3.setBackground(new Color(red, green, blue));

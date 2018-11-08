@@ -24,6 +24,7 @@ import javax.swing.JMenuItem;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class GUI {
 
@@ -33,7 +34,7 @@ private JTextField textField;
 	 * Launch the application.
 	 */
 	
-	public static JFrame frame = new JFrame();
+	public static JFrame frmFractionCalculator = new JFrame();
 	public static JPanel panel_2 = new JPanel();
 	public static JPanel panel_1 = new JPanel();
 	public static JPanel panel_3 = new JPanel();
@@ -46,7 +47,7 @@ private JTextField textField;
 			public void run() {
 				try {
 					GUI window = new GUI();
-					window.frame.setVisible(true);
+					window.frmFractionCalculator.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -82,15 +83,18 @@ private JTextField textField;
 		} catch (IllegalAccessException e) {
 
 		}
+		frmFractionCalculator.setTitle("Fraction Calculator");
+		frmFractionCalculator.setResizable(false);
+		frmFractionCalculator.setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/javax/swing/plaf/metal/icons/ocean/menu.gif")));
 		
-		frame.setBounds(100, 100, 442, 467);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmFractionCalculator.setBounds(100, 100, 437, 467);
+		frmFractionCalculator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmFractionCalculator.getContentPane().setLayout(null);
 		
 		JPanel TopMargin = new JPanel();
-		TopMargin.setBackground(new Color(240, 240, 240)); //214, 217, 223
+		TopMargin.setBackground(new Color(214, 227, 223)); //214, 217, 223
 		TopMargin.setBounds(10, 11, 406, 96);
-		frame.getContentPane().add(TopMargin);
+		frmFractionCalculator.getContentPane().add(TopMargin);
 		TopMargin.setLayout(null);
 		
 
@@ -129,7 +133,7 @@ private JTextField textField;
 		
 
 		panel_1.setBounds(10, 119, 215, 248);
-		frame.getContentPane().add(panel_1);
+		frmFractionCalculator.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 
 		
@@ -250,7 +254,7 @@ private JTextField textField;
 		
 
 		panel_5.setBounds(233, 118, 183, 249);
-		frame.getContentPane().add(panel_5);
+		frmFractionCalculator.getContentPane().add(panel_5);
 		panel_5.setLayout(new GridLayout(0, 1, 0, 10));
 		
 		JButton Add = new JButton("+");
@@ -300,16 +304,16 @@ private JTextField textField;
 		lblNoteYouMust.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNoteYouMust.setForeground(Color.BLACK);
 		lblNoteYouMust.setBounds(10, 372, 406, 22);
-		frame.getContentPane().add(lblNoteYouMust);
+		frmFractionCalculator.getContentPane().add(lblNoteYouMust);
 		
 		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		frmFractionCalculator.setJMenuBar(menuBar);
 		
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 		
 		JMenuItem mnColor = new JMenuItem("Change Color");
-		mnColor.setIcon(new ImageIcon(GUI.class.getResource("/com/sun/javafx/scene/control/skin/caspian/dialog-information.png")));
+		mnColor.setIcon(new ImageIcon(GUI.class.getResource("/com/sun/javafx/scene/control/skin/modena/dialog-confirm.png")));
 		mnColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ColorSliders.colorChange();
